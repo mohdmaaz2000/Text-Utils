@@ -22,11 +22,21 @@ export default function TextForms(props) {
     const speak = () => {
         let msg = new SpeechSynthesisUtterance();
         msg.text = text;
-        if(text ==''){
+        if (text === '') {
             msg.text = "Nothing to read";
         }
         window.speechSynthesis.speak(msg);
-      }
+    }
+
+    const copyText = () => {
+        var myText = document.getElementById('textArea');
+        myText.select();
+        navigator.clipboard.writeText(myText.value);
+    }
+    const removeExtraSpace = () => {
+        let myText = text.split(/[ ]+/);    // use of rejex to split the text where there is extra space
+        setText(myText.join(" ")); 
+    }
 
     return (
         <>
@@ -34,12 +44,15 @@ export default function TextForms(props) {
 
                 <div className="mb-3">
                     <h1>{props.heading}</h1>
-                    <textarea className="form-control" rows="6" value={text} onChange={changeVal} placeholder="Enter the text here"></textarea>
+                    <textarea className="form-control" id='textArea' rows="6" value={text} onChange={changeVal} placeholder="Enter the text here"></textarea>
                     <button className="btn btn-primary button" onClick={toUpper}>Convert to Uppercase</button>
                     <button className="btn btn-primary button" onClick={toLower}>Convert to Lowercase</button>
                     <button className="btn btn-primary button" onClick={clear}>Clear</button>
                     <button className="btn btn-primary button" onClick={speak}>Speak</button>
+                    <button className="btn btn-primary button" onClick={copyText}>Copy Text</button>
+                    <button className="btn btn-primary button" onClick={removeExtraSpace}>Remove Extra Space</button>
                 </div>
+
             </div>
             <div className="container">
                 <hr />
