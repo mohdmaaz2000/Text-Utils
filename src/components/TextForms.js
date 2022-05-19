@@ -16,6 +16,17 @@ export default function TextForms(props) {
         let myText = text;
         setText(myText.toLowerCase());
     }
+    const clear = () => {
+        setText('');
+    }
+    const speak = () => {
+        let msg = new SpeechSynthesisUtterance();
+        msg.text = text;
+        if(text ==''){
+            msg.text = "Nothing to read";
+        }
+        window.speechSynthesis.speak(msg);
+      }
 
     return (
         <>
@@ -26,15 +37,17 @@ export default function TextForms(props) {
                     <textarea className="form-control" rows="6" value={text} onChange={changeVal} placeholder="Enter the text here"></textarea>
                     <button className="btn btn-primary button" onClick={toUpper}>Convert to Uppercase</button>
                     <button className="btn btn-primary button" onClick={toLower}>Convert to Lowercase</button>
+                    <button className="btn btn-primary button" onClick={clear}>Clear</button>
+                    <button className="btn btn-primary button" onClick={speak}>Speak</button>
                 </div>
             </div>
             <div className="container">
                 <hr />
-                <h2>Preview</h2>
+                <h2>Summary</h2>
                 <p><b>{text.split(" ").length}</b> words and <b>{text.length}</b> characters</p>
                 <p><b>{text.split(" ").length * 0.008}</b> minutes to read</p>
                 <hr />
-                <h2>Summary</h2>
+                <h2>Preview</h2>
                 <p>{text}</p>
             </div>
         </>
