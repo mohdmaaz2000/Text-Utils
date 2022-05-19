@@ -49,6 +49,7 @@ export default function TextForms(props) {
                 <hr />
                 <h2>Preview</h2>
                 <p>{text}</p>
+                <hr />
             </div>
         </>
     )
