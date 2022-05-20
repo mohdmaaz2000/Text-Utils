@@ -11,17 +11,17 @@ export default function TextForms(props) {
     const toUpper = () => {
         let myText = text;
         setText(myText.toUpperCase());
-        props.showAlert('Converted to Upper Case','success');
+        props.showAlert('Converted to Upper Case', 'success');
     }
     const toLower = () => {
         let myText = text;
         setText(myText.toLowerCase());
-        props.showAlert('Converted to Lower Case','success');
+        props.showAlert('Converted to Lower Case', 'success');
 
     }
     const clear = () => {
         setText('');
-        props.showAlert('Cleared the text area','success');
+        props.showAlert('Cleared the text area', 'success');
     }
     const speak = () => {
         let msg = new SpeechSynthesisUtterance();
@@ -30,19 +30,34 @@ export default function TextForms(props) {
             msg.text = "Nothing to read";
         }
         window.speechSynthesis.speak(msg);
-        props.showAlert('Speaking','success');
+        props.showAlert('Speaking', 'success');
     }
 
     const copyText = () => {
         var myText = document.getElementById('textArea');
         myText.select();
         navigator.clipboard.writeText(myText.value);
-        props.showAlert('Copied to clipboard','success');
+        props.showAlert('Copied to clipboard', 'success');
     }
     const removeExtraSpace = () => {
         let myText = text.split(/[ ]+/);    // use of rejex to split the text where there is extra space
-        setText(myText.join(" ")); 
-        props.showAlert('Extra Spaces are removed','success');
+        setText(myText.join(" "));
+        props.showAlert('Extra Spaces are removed', 'success');
+    }
+
+    const countWord = (word) => {
+        if (word === '') {
+            return 0;
+        }
+        else {
+            let myText = word.split(/[ ]+/);
+            if (myText.join(" ").slice(-1) === ' ') {
+                return myText.length - 1;
+            }
+            else {
+                return myText.length;
+            }
+        }
     }
 
     return (
@@ -62,11 +77,11 @@ export default function TextForms(props) {
 
             </div>
             <div className="container">
-                <hr  style={props.style}/>
+                <hr style={props.style} />
                 <h2 style={props.style}>Summary</h2>
-                <p style={props.style}><b>{text.split(" ").length}</b> words and <b>{text.length}</b> characters</p>
-                <p style={props.style}><b>{text.split(" ").length * 0.008}</b> minutes to read</p>
-                <hr style={props.style}/>
+                <p style={props.style}><b>{countWord(text)}</b> words and <b>{text.length}</b> characters</p>
+                <p style={props.style}><b>{countWord(text) * 0.008}</b> minutes to read</p>
+                <hr style={props.style} />
                 <h2 style={props.style}>Preview</h2>
                 <p style={props.style}>{text}</p>
                 <hr />

@@ -35,6 +35,10 @@
 .button{
   margin: 15px 10px 15px 0px;
 }
+.alert{
+  position: relative;
+  float: right;
+}
 
 @keyframes App-logo-spin {
   from {
