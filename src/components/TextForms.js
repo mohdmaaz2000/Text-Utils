@@ -37,6 +37,7 @@ export default function TextForms(props) {
         var myText = document.getElementById('textArea');
         myText.select();
         navigator.clipboard.writeText(myText.value);
+        document.getSelection().removeAllRanges();
         props.showAlert('Copied to clipboard', 'success');
     }
     const removeExtraSpace = () => {
@@ -67,12 +68,12 @@ export default function TextForms(props) {
                 <div className="mb-3">
                     <h1 style={props.style}>{props.heading}</h1>
                     <textarea className="form-control" id='textArea' rows="6" value={text} onChange={changeVal} placeholder="Enter the text here" style={props.style}></textarea>
-                    <button className="btn btn-primary button" onClick={toUpper}>Convert to Uppercase</button>
-                    <button className="btn btn-primary button" onClick={toLower}>Convert to Lowercase</button>
-                    <button className="btn btn-primary button" onClick={clear}>Clear</button>
-                    <button className="btn btn-primary button" onClick={speak}>Speak</button>
-                    <button className="btn btn-primary button" onClick={copyText}>Copy Text</button>
-                    <button className="btn btn-primary button" onClick={removeExtraSpace}>Remove Extra Space</button>
+                    <button disabled={text.length === 0} className="btn btn-primary button" onClick={toUpper}>Convert to Uppercase</button>
+                    <button disabled={text.length === 0} className="btn btn-primary button" onClick={toLower}>Convert to Lowercase</button>
+                    <button disabled={text.length === 0} className="btn btn-primary button" onClick={clear}>Clear</button>
+                    <button disabled={text.length === 0} className="btn btn-primary button" onClick={speak}>Speak</button>
+                    <button disabled={text.length === 0} className="btn btn-primary button" onClick={copyText}>Copy Text</button>
+                    <button disabled={text.length === 0} className="btn btn-primary button" onClick={removeExtraSpace}>Remove Extra Space</button>
                 </div>
 
             </div>
@@ -83,7 +84,7 @@ export default function TextForms(props) {
                 <p style={props.style}><b>{countWord(text) * 0.008}</b> minutes to read</p>
                 <hr style={props.style} />
                 <h2 style={props.style}>Preview</h2>
-                <p style={props.style}>{text}</p>
+                <p style={props.style}>{text.length===0?'Nothing to preview' : text}</p>
                 <hr />
             </div>
         </>
