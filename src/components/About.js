@@ -13,12 +13,12 @@ let style = {
 
             <div className="accordion" id="accordionExample"  >
                 <div className="accordion-item" style={style}>
-                    <h2 className="accordion-header" id="headingOne">
+                    <h2 className="accordion-header " id="headingOne">
                         <button className="accordion-button" style={style} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                            <strong>Easy to Access</strong> 
                         </button>
                     </h2>
-                    <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div className="accordion-body" style={style}>
                             You can easily manipulate your text. Text Utils helps you to convert your text from upper case to lower case and lower case to upper case. You can remove extra spaces from your sentence.You can pronounce your text and many more
                         </div>
